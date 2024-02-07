@@ -1,0 +1,8 @@
+.select{
+    width: 200px; /* Ancho del select */
+    padding: 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    border: 1px solid #ccc; /* Borde del select */
+    border-radius: 5px; /* Bordes redondeados */
+    outline: none; /* Quita el contorno predeterminado en algunos navegadores */
+}
