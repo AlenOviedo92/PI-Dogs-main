@@ -5,3 +5,4 @@ export const GET_DOGS_BY_NAME = 'GET_DOGS_BY_NAME';
 export const FILTER_ORIGIN = 'FILTER_ORIGIN';
 export const FILTER_TEMPERAMENT = 'FILTER_TEMPERAMENT';
 export const ORDER = 'ORDER';
+export const CHANGE_PAGE = 'CHANGE_PAGE';

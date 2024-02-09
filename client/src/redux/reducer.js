@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER } from "./action-types";
+import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE } from "./action-types";
 import { average } from "../utils";
 
 const initialState = {
@@ -7,6 +7,10 @@ const initialState = {
     dog: {},
     temperaments: [],
     dogsByName: [],
+    pagination: {
+        currentPage: 1,
+        pageSize: 8,
+    },
 };
 
 const reducer = (state=initialState, action) => {
@@ -81,8 +85,11 @@ const reducer = (state=initialState, action) => {
                     })
                 };
             }
-        break;
+            break;
+        case CHANGE_PAGE:
+            return { ...state, pagination: { ...state.pagination, currentPage: action.payload } }
         default:
+            //console.log('Unhandled action:', action.type);
             return { ...state };
     }
 };

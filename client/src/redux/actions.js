@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER } from './action-types';
+import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE } from './action-types';
 import axios from 'axios';
 
 export const getDogs = () => {
@@ -34,9 +34,13 @@ export const originFilter = (origin) => {
 };
 
 export const temperamentFilter = (temperament) => {
-    return { type: FILTER_TEMPERAMENT, payload: temperament};
+    return { type: FILTER_TEMPERAMENT, payload: temperament };
 };
 
 export const order = (order) => {
-    return { type: ORDER, payload: order};
+    return { type: ORDER, payload: order };
+};
+
+export const chagePage = (page) => {
+    return { type: CHANGE_PAGE, payload: page };
 };
