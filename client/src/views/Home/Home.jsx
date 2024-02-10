@@ -23,6 +23,7 @@ const Home = () => {
 
     const clickHandler = (event) => {
         dispatch(getDogsByName(searchBar.name));
+        changePages(1);
     };
     
     const dogsByName = useSelector(state => state.dogsByName);
@@ -31,6 +32,7 @@ const Home = () => {
     //FILTER BY ORIGIN
     const handleOriginFilter = (event) => {
         dispatch(originFilter(event.target.value));
+        changePages(1);                     
     };
 
     //FILTER BY TEMPERAMENTS//
@@ -40,11 +42,13 @@ const Home = () => {
 
     const handleTemperamentFilter = (event) => {
         dispatch(temperamentFilter(event.target.value));
+        changePages(1);
     };
 
     //ORDER//
     const handleOrder = (event) => {
         dispatch(order(event.target.value));
+        changePages(1);
     };
 
     //PAGINATION//
@@ -54,7 +58,7 @@ const Home = () => {
     const totalDogs = dogs.length;
     const pageSize = pagination?.pageSize || 8;
     const currentPage = pagination?.currentPage || 1;
-    const changePage = (page) => {
+    const changePages = (page) => {
         console.log('Cambiando la página a:', page);
         dispatch(chagePage(page));
     };
@@ -68,7 +72,7 @@ const Home = () => {
         <div>
             <div>
                 <label>Breed name: </label>
-                <input type='search' value={searchBar.name} onChange={changeHandler} name='name' />
+                <input type='search' value={searchBar.name} onChange={changeHandler} name='name' placeholder='search...'/>
                 <button type='submit' onClick={clickHandler}>SEND</button>
                 {errors.name && <span>{errors.name}</span>}
             </div>
@@ -107,7 +111,7 @@ const Home = () => {
                 totalDogs={!searchBar.name ? totalDogs : typeof dogsByName === 'string' ? 0 : totalDogsSearchBar}
                 pageSize={pageSize}
                 currentPage={currentPage} 
-                onPageChange={(newPage) => changePage(newPage)}    
+                onPageChange={(newPage) => changePages(newPage)}    
             />
         </div>
     )
