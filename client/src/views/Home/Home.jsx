@@ -2,7 +2,7 @@ import Cards from '../../components/Cards/Cards';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getDogsByName, getTemperaments, originFilter, temperamentFilter, order, chagePage } from '../../redux/actions';
-import { validateSearchBar } from '../../utils';
+import { validateSearchBar, combineFilters } from '../../utils';
 import Pagination from '../../components/Pagination/Pagination';
 
 const Home = () => {
@@ -27,7 +27,6 @@ const Home = () => {
     };
     
     const dogsByName = useSelector(state => state.dogsByName);
-    const totalDogsSearchBar = dogsByName.length;
 
     //FILTER BY ORIGIN
     const handleOriginFilter = (event) => {
@@ -51,11 +50,17 @@ const Home = () => {
         changePages(1);
     };
 
-    //PAGINATION//
+    //COMBINATION OF FILTERS AND SORTS//
+    const filters = useSelector(state => state.filters);                                                    //Obtendo los filtros y el orden acumulados en el Estado Global
     const dogs = useSelector(state => state.dogs);
-    const pagination = useSelector(state => state.pagination);
 
-    const totalDogs = dogs.length;
+    const filteredDogs = combineFilters(dogs, filters);
+    const filteredDogsSearchBar = typeof dogsByName !== 'string' ? combineFilters(dogsByName, filters) : [];                                                //Hace parte de la SearchBar
+   
+    //PAGINATION//
+    const pagination = useSelector(state => state.pagination);
+    const totalDogs = filteredDogs.length;
+    const totalDogsSearchBar = filteredDogsSearchBar.length;
     const pageSize = pagination?.pageSize || 8;
     const currentPage = pagination?.currentPage || 1;
     const changePages = (page) => {
@@ -65,8 +70,8 @@ const Home = () => {
 
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize, totalDogs);
-    const visibleDogs = dogs.slice(startIndex, endIndex);
-    const visibleDogsSearchBar = dogsByName.slice(startIndex, endIndex);                                    //Hace parte de la SearchBar
+    const visibleDogs = filteredDogs.slice(startIndex, endIndex);
+    const visibleDogsSearchBar = filteredDogsSearchBar.slice(startIndex, endIndex);                          //Hace parte de la SearchBar
 
     return(
         <div>

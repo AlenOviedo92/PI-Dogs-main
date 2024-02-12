@@ -9,6 +9,59 @@ const average = (string) => {
     else if(arr.length === 2) return (+arr[0] + +arr[1])/2;
 };
 
+const combineFilters = (arr, filters) => {
+    let filteredDogs = arr.filter((dog) => dog.name !== 'Olde English Bulldogge' && dog.name !== 'Smooth Fox Terrier');
+
+    if(filters.origin !== 'All') {
+        filteredDogs = filteredDogs.filter((dog) => (filters.origin === 'API') ? dog.created === false : dog.created === true);
+    }
+
+    if(filters.temperament !== 'All') {
+        filteredDogs = filteredDogs.filter((dog) => dog.temperaments?.split(', ').includes(filters.temperament));
+    }
+
+    if(filters.order !== 'None') {
+        filteredDogs.sort((a, b) => {
+            if(filters.order === 'AO') {
+                if (a.name.toUpperCase() > b.name.toUpperCase()) {
+                    return 1;
+                }
+                if (a.name.toUpperCase() < b.name.toUpperCase()) {
+                    return -1;
+                }
+                return 0; // a must be equal to b
+            }   else if(filters.order === 'DO') {
+                if (a.name.toUpperCase() < b.name.toUpperCase()) {
+                    return 1;
+            }
+                if (a.name.toUpperCase() > b.name.toUpperCase()) {
+                    return -1;
+                }
+                return 0; // a must be equal to b
+            } else if(filters.order === 'AW') {
+                if (average(a.weight) < average(b.weight)) {
+                return 1;
+                }
+                if (average(a.weight) > average(b.weight)) {
+                    return -1;
+                }
+                return 0; // a must be equal to b
+            } else if(filters.order === 'DW') {
+                if (average(a.weight) > average(b.weight)) {
+                    return 1;
+                }
+                if (average(a.weight) < average(b.weight)) {
+                    return -1;
+                }
+                return 0; // a must be equal to b
+            } else {
+                return 0; //No se aplica ordenamiento
+            }
+        });
+    }
+    return filteredDogs;
+};
+
 const validate = (form, setErrors, errors) => {                                                                     //Esta fn se encarga de hacer la validación del estado(local) del formulario. Si saco esta fn del componente debo pasarle como parámetros adicionales serErrors y errors
     if(+form.maxHeight > +form.minHeight) {
         setErrors((errors) => ({ ...errors, maxHeight: '', minHeight: '' }));
@@ -43,6 +96,6 @@ const validateSearchBar = (searchBar, setErrors, errors) => {
     if(searchBar.name === '') setErrors((errors) => ({ ...errors, name: '' }));
 };
 
-export { convertArray, average, validate, validateSearchBar };
+export { convertArray, average, combineFilters, validate, validateSearchBar };
 
 //NOTA: Cuando uso setErrors() varias veces en el mismo bloque de código, debo escribir su parámetro, NO como un obj, sino como una fn: ((errors) => ({...errors, 'propiedad a actualizar' }))
