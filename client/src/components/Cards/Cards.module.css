@@ -1,8 +1,9 @@
-.container{
-    border: 1.5px solid black;
+.container {
+    /* border: 1.5px solid black;
+    border-radius: 15px; */
+    border: transparent;
     display: flex;
-    flex-direction: row;
-    border-radius: 15px;
     flex-wrap: wrap;
     gap: 1em;
+    justify-content: center;                        /* Centra las tarjetas horizontalmente */
 }

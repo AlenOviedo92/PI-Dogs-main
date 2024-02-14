@@ -1,8 +1,72 @@
-.select{
-    width: 200px; /* Ancho del select */
-    padding: 10px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño de fuente */
-    border: 1px solid #ccc; /* Borde del select */
-    border-radius: 5px; /* Bordes redondeados */
-    outline: none; /* Quita el contorno predeterminado en algunos navegadores */
+.form{
+    display: flex;                          /* Para centrar el <form> */
+    flex-direction: column;                 /* Para centrar el <form> */
+    align-items: center;                    /* Para centrar el <form> */
 }
+
+.form-container {
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: #b6ad90;
+    padding: 20px;                          /* Separa todos los elementos del border */
+}
+
+.form-container label {
+    font-size: 20px;
+    font-family: Saira, sans-serif;
+}
+
+.form-container input {
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #dad7cd;
+    font-size: 16px;
+    font-family: Saira, sans-serif;
+}
+
+.form-container div {
+    margin-bottom: 12px;                    /* Ajusta el valor según el espacio deseado entre divs */
+}
+
+.form-container button {
+    width: 90px;                            /* Ajusta el ancho del botón */
+    height: 90px;                           /* Ajusta el alto del botón */
+    border-radius: 50%;                     /* Ajusta el radio del borde para que sea completamente redondo */
+    margin-top: 15px;                       /* Ajusta el espacio entre el último input y el botón */
+    border: 2px solid #dad7cd;
+    background-color: #333d29;
+    color: #dad7cd;
+    font-family: Germania One, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    border: 2px solid #333d29;
+    color: #333d29;
+    background-color: #dad7cd;
+}
+
+.form-container h1 {
+    display: flex;                          /* Centra el h1 */
+    justify-content: center;                /* Centra el h1 */
+    font-size: 35px;
+    font-family: Saira, sans-serif;
+    margin: 40px;
+}
+
+.form-container select {
+    border: 2px solid black;
+    background-color: #dad7cd;
+    cursor: pointer;
+    font-family: Saira, sans-serif;
+}
+
+.button-container {
+    display: flex;                          /* Centre el button CREATE */
+    justify-content: center;                /* Centre el button CREATE */
+}
+
+
+

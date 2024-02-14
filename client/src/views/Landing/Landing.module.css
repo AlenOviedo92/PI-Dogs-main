@@ -1,0 +1,26 @@
+.landing-container {
+    background-image: url('../../images/DOGS1.jpeg');           /* Agrega la imagen de fondo */
+    background-size: cover;                                     /* Para que la imagen de fondo cubra todo el contenedor */
+    background-position: center;                                /* Para centrar la imagen de fondo */
+    height: 100vh;                                              /* Establece la altura al 100% del viewport */
+    display: flex;                                              /* Permite que el contenido dentro del contenedor se ajuste correctamente */
+    justify-content: center;                                    /* Centra el contenido horizontalmente */
+    align-items: flex-end;                                      /* Ubica los elementos en la parte inferior del container */
+}
+
+.link-to-home {
+    border: 3px solid black;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-bottom: 30px;                                        /* Separa el Link de la parte inferior de la página */
+    padding: 5px 15px;                                          /* Agrega espacio alrededor del texto dentro del enlace */
+    font-size: 20px;
+    font-family: Quantico, sans-serif;
+    font-weight: bold;
+    color: black;
+    transition: font-size 0.3s;
+}
+
+.link-to-home:hover {
+    font-size: 28px;
+}

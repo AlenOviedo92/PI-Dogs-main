@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { getDogsByName, getTemperaments, originFilter, temperamentFilter, order, chagePage } from '../../redux/actions';
 import { validateSearchBar, combineFilters } from '../../utils';
 import Pagination from '../../components/Pagination/Pagination';
+import style from './Home.module.css';
 
 const Home = () => {
     //SEARCHBAR//
@@ -75,37 +76,40 @@ const Home = () => {
 
     return(
         <div>
-            <div>
-                <label>Breed name: </label>
-                <input type='search' value={searchBar.name} onChange={changeHandler} name='name' placeholder='search...'/>
-                <button type='submit' onClick={clickHandler}>SEND</button>
-                {errors.name && <span>{errors.name}</span>}
+            <div className={style['searchbar-container']}>
+                <label className={style.label}>Breed name: </label>
+                <input type='search' value={searchBar.name} onChange={changeHandler} name='name' placeholder='search...' className={style.input}/>
+                <button type='submit' onClick={clickHandler} className={style.button}>SEND</button>
+                {errors.name && <span style={{color: 'red'}}>{errors.name}</span>}
+            </div>
+            
+            <div className={style['buttons-container']}>
+                <select onChange={handleOriginFilter}>
+                    <option value='API'>Its origin is the API</option>
+                    <option value='DB'>Its origin is the DB</option>
+                    <option value='All'>All</option>
+                </select>
+
+                <select onChange={handleTemperamentFilter}>
+                    {
+                        temperaments.map((temperament) => {
+                            return <option key={temperament.id} value={temperament.name}>{temperament.name}</option>
+                        })
+                    }
+                </select>
+
+                <select onChange={handleOrder}>
+                    <option value='AO'>Ascending order (alphabet)</option>
+                    <option value='DO'>Descending order (alphabet)</option>
+                </select>
+
+                <select onChange={handleOrder}>
+                    <option value='AW'>Descending order (weight)</option>                                         {/*OJO CON ESTE ORDEN???*/}
+                    <option value='DW'>Ascending order (weight)</option>
+                </select>
             </div>
 
-            <select onChange={handleOriginFilter}>
-                <option value='API'>Its origin is the API</option>
-                <option value='DB'>Its origin is the DB</option>
-            </select>
-
-            <select onChange={handleTemperamentFilter}>
-                {
-                    temperaments.map((temperament) => {
-                        return <option key={temperament.id} value={temperament.name}>{temperament.name}</option>
-                    })
-                }
-            </select>
-
-            <select onChange={handleOrder}>
-                <option value='AO'>Ascending order (alphabet)</option>
-                <option value='DO'>Descending order (alphabet)</option>
-            </select>
-
-            <select onChange={handleOrder}>
-                <option value='AW'>Descending order (weight)</option>                                         {/*OJO CON ESTE ORDEN???*/}
-                <option value='DW'>Ascending order (weight)</option>
-            </select>
-
-            <div>
+            <div className={style['cards-container']}>
                 {
                     !searchBar.name ? <Cards visibleDogs={visibleDogs} /> : typeof dogsByName === 'string' ? <p>{dogsByName}</p> :
                     <Cards visibleDogs={visibleDogsSearchBar} />

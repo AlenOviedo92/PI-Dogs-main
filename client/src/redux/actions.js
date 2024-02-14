@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE } from './action-types';
+import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG } from './action-types';
 import axios from 'axios';
 
 export const getDogs = () => {
@@ -43,4 +43,8 @@ export const order = (order) => {
 
 export const chagePage = (page) => {
     return { type: CHANGE_PAGE, payload: page };
+};
+
+export const clearDog = () => {
+    return { type: CLEAR_DOG };
 };

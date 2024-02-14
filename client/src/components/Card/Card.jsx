@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ id, image, name, temperaments, weight }) => {
     return(
-        <Link to={`/detail/${id}`}>
+        <Link to={`/detail/${id}`} className={style['link-without-underline']}>
             <div className={style.card}>
-                <img src={image} alt='Dog breed'/>
-                <p>Name: {name}</p>
-                <p>Temperaments: {temperaments}</p>
-                <p>Weight: {weight}</p>
+                <div className={style['card-image']}>
+                    <img src={image} alt='Dog breed'/>
+                </div>
+                <div className={style['card-content']}>
+                    <strong>Name: {name}</strong>
+                    <p>Temperaments: {temperaments}</p>
+                    <p>Weight: {weight}</p>
+                </div>
             </div>
         </Link>
     )

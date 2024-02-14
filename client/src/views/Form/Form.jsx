@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getTemperaments } from '../../redux/actions';
 import axios from 'axios';
 import { validate, convertArray } from '../../utils';
-//import style from './Form.module.css';
+import style from './Form.module.css';
 
 const Form = () => {
     const dispatch = useDispatch();
@@ -63,40 +63,46 @@ const Form = () => {
     };
 
     return(
-        <form onSubmit={submitHandler}>
-            <div>
-                <label>Name: </label>
-                <input type='text' value={form.name} onChange={handleOnChange} name='name' />
-                {errors.name && <span>{errors.name}</span>}
-            </div>
-            <div>
-                <label>Minimum height: </label>
-                <input type='text' value={form.minHeight} onChange={handleOnChange} name='minHeight' />
+        <form onSubmit={submitHandler} className={style.form}>
+            <div className={style['form-container']}> 
+                <h1 className={style.h1}>CREATE DOG BREED</h1>
+                <div>
+                    <label>Name: </label>
+                    <input type='text' value={form.name} onChange={handleOnChange} name='name' />
+                    {errors.name && <span style={{color: 'red'}}>{errors.name}</span>}
+                </div>
+                <div>
+                    <label>Minimum height: </label>
+                    <input type='text' value={form.minHeight} onChange={handleOnChange} name='minHeight' />
 
-                <label>Maximum height: </label>
-                <input type='text' value={form.maxHeight} onChange={handleOnChange} name='maxHeight' />
-                {errors.maxHeight && <span>{errors.maxHeight}</span>}
-            </div>
-            <div>
-                <label>Minimum weight: </label>
-                <input type='text' value={form.minWeight} onChange={handleOnChange} name='minWeight' />
+                    <label>Maximum height: </label>
+                    <input type='text' value={form.maxHeight} onChange={handleOnChange} name='maxHeight' />
+                    {errors.maxHeight && <span style={{color: 'red'}}>{errors.maxHeight}</span>}
+                </div>
+                <div>
+                    <label>Minimum weight: </label>
+                    <input type='text' value={form.minWeight} onChange={handleOnChange} name='minWeight' />
 
-                <label>Maximum weight: </label>
-                <input type='text' value={form.maxWeight} onChange={handleOnChange} name='maxWeight' />
-                {errors.maxWeight && <span>{errors.maxWeight}</span>}
+                    <label>Maximum weight: </label>
+                    <input type='text' value={form.maxWeight} onChange={handleOnChange} name='maxWeight' />
+                    {errors.maxWeight && <span style={{color: 'red'}}>{errors.maxWeight}</span>}
+                </div>
+                <div>
+                    <label>Life span: </label>
+                    <input type='text' value={form.life_span} onChange={handleOnChange} name='life_span' />
+                </div>
+                <div>
+                    <label>Temperaments: </label>
+                    <select multiple onChange={selectHandler}/*size='51' className={style.select}*/> 
+                        {temperaments.map((temperament) => {
+                            return <option key={temperament.id} value={temperament.id}>{temperament.name}</option>
+                        })}
+                    </select>
+                </div>
+                <div className={style['button-container']}>
+                    <button type='submit' disabled = {!form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperament.length}>CREATE</button>
+                </div>
             </div>
-            <div>
-                <label>Life span: </label>
-                <input type='text' value={form.life_span} onChange={handleOnChange} name='life_span' />
-            </div>
-            <div>
-                <select multiple onChange={selectHandler}/*size='51' className={style.select}*/> 
-                    {temperaments.map((temperament) => {
-                        return <option key={temperament.id} value={temperament.id}>{temperament.name}</option>
-                    })}
-                </select>
-            </div>
-            <button type='submit' disabled = {!form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperament.length}>CREATE</button>
         </form>
     )
 };

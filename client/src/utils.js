@@ -14,6 +14,8 @@ const combineFilters = (arr, filters) => {
 
     if(filters.origin !== 'All') {
         filteredDogs = filteredDogs.filter((dog) => (filters.origin === 'API') ? dog.created === false : dog.created === true);
+    } else {
+        filteredDogs = filteredDogs;
     }
 
     if(filters.temperament !== 'All') {

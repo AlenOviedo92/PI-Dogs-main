@@ -6,7 +6,17 @@ const axios = require('axios');
 const { YOUR_API_KEY } = process.env;
 
 const getDogByName = async(name) => {
-    const databaseDogs = await Dog.findAll({ where: {name: { [Op.iLike]: `%${name}%` }} });                         //El operador iLike permite buscar un patrón en strings, no distingue entre mayúsculas y minúsculas
+    const databaseDogsRaw = await Dog.findAll({ where: {name: { [Op.iLike]: `%${name}%` }},                      //El operador iLike permite buscar un patrón en strings, no distingue entre mayúsculas y minúsculas
+        include: {                                                                                               //Para incluir los temperamentos asociados a los DogsByName de la DB
+                    model: Temperament,
+                    attributes: ['name'],
+                    as: 'Temperaments',
+                    through: {
+                        attributes: []
+                    },
+                }
+    }); 
+    const databaseDogs = databaseDogsRaw.map((dog) => cleanTemperaments(dog));                        
     const apiDogs = cleanPropsDogs((await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`, {
         headers: {
             'x-api-key': YOUR_API_KEY

@@ -1,6 +1,37 @@
-.card{
-    border: 1px solid black;
-    width: fit-content;
-    height: fit-content;
+.card {
+    width: 380px;                           /* Ajusta el ancho de la tarjeta */
+    height: 360px;                          /* Ajusta la altura de la tarjeta */
+    border: 3px solid #344e41;;           /* Opcional: un borde para cada tarjeta */
     border-radius: 10px;
+    overflow: hidden;                       /* Evita que el contenido desborde de la tarjeta */
+    background-color: #344e41;
+    color: #dad7cd;
 }
+
+.card:hover {
+    background-color: #dad7cd;
+    color:  #344e41;;
+}
+
+.card-image {
+    width: 380px;                           /* Ajusta la anchura de la imagen */
+    height: 220px;                          /* Ajusta la altura de la imagen */
+    overflow: hidden;                       /* Evita que la imagen desborde del contenedor */
+}
+
+.card-image img {
+    width: 100%;                            /* Ajusta la anchura de la imagen para llenar su contenedor */
+    height: 100%;                           /* Ajusta la altura de la imagen para llenar su contenedor */
+}
+
+.card-content {
+    text-align: center;
+    font-family: Jost, sans-serif;
+    line-height: 1;
+    padding: 10px;
+}
+
+.link-without-underline {
+    text-decoration: none;                  /* Quita el subrayado predeterminado de <Link></Link> */
+}
+

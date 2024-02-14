@@ -15,16 +15,20 @@ const Cards = ({ visibleDogs }) => {
     return(
         <div className={style.container}>
             {visibleDogs.map((dog) => {
-                return <Card
-                    key={dog.id}
-                    id={dog.id}
-                    image={dog.image}
-                    name={dog.name}
-                    height={dog.height}
-                    weight={dog.weight}
-                    life_span={dog.life_span}
-                    temperaments={dog.temperaments}
-                />
+                return (
+                    <div key={dog.id}>
+                        <Card
+                            key={dog.id}
+                            id={dog.id}
+                            image={dog.image}
+                            name={dog.name}
+                            height={dog.height}
+                            weight={dog.weight}
+                            life_span={dog.life_span}
+                            temperaments={dog.temperaments}
+                        />
+                    </div>
+                )
             })}
         </div>
     )

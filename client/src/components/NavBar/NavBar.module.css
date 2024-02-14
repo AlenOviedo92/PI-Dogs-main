@@ -1,8 +1,22 @@
-.mainContainer{
+.mainContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border-radius: 15px;
-    border: 2px solid black;
-    /* background-color: blue; */
+    justify-content: center;
+    padding: 50px;
+    border: transparent;
 }
+
+.mainContainer a {
+    padding: 0px 30px;
+    margin: 0px 40px;
+    color: #582f0e;
+    text-decoration: none;
+    font-family: Germania One, sans-serif;
+    font-size: 45px;
+    transition: font-size 0.3s;
+}
+
+.mainContainer a:hover {
+    font-size: 65px;
+}
+
+

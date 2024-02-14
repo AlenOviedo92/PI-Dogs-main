@@ -1,3 +1,22 @@
-.detail{
-    border: 1px solid black;
+.detail-container{
+    border: 3px solid #582f0e;
+    background-color: #c2c5aa;
+    border-radius: 10px;
+    width: 460px;                           
+    height: 600px;                          
+    margin: 0 auto;                         /* Centrar el contenedor en la página */
+    overflow: hidden; 
+}
+
+.detail-container img {
+    width: 460px;                           /* Ajusta la anchura de la imagen */
+    height: 380px;                          /* Ajusta la altura de la imagen */
+    overflow: hidden;                       /* Evita que la imagen desborde del contenedor */
+}
+
+.detail-container p {
+    margin: 5px 0;                         /* Añadir un espacio entre los párrafos */
+    font-family: Quantico, sans-serif;
+    font-size: 16.5px;
+    text-align: center;
 }

@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE } from "./action-types";
+import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG } from "./action-types";
 
 const initialState = {
     dogs: [],
@@ -35,6 +35,8 @@ const reducer = (state=initialState, action) => {
             return { ...state, filters: {...state.filters, order: action.payload } };
         case CHANGE_PAGE:
             return { ...state, pagination: { ...state.pagination, currentPage: action.payload } }
+        case CLEAR_DOG:
+            return { ...state, dog: {} }
         default:
             //console.log('Unhandled action:', action.type);
             return { ...state };

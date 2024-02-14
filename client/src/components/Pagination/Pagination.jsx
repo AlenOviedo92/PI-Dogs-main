@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import style from './Pagination.module.css';
 
 const Pagination = ({ totalDogs, pageSize, currentPage, onPageChange }) => {
 
@@ -26,18 +27,21 @@ const Pagination = ({ totalDogs, pageSize, currentPage, onPageChange }) => {
     };
 
     return(
-        <div>
-            <button onClick={() => handlePageChange(1)} disabled={currentPage === 1 || !totalPages}>{'<<'}</button>
-            <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1 || !totalPages}>{'<prev>'}</button>
-            {
-                pages.map((page) => {
-                    return <button key={page} onClick={() => handlePageChange(page)} disabled={page === currentPage}>{page}</button> 
-                })
-            }
-            <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages || totalPages === 0}>{'<next>'}</button>
-            <button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages || totalPages === 0}>{'>>'}</button>
-            <br />
-            { totalPages === 0 ? <span>Page: 0/{totalPages}</span> : <span>Page: {currentPage}/{totalPages}</span>}
+        <div className={style.container}>
+            <div>
+                <button onClick={() => handlePageChange(1)} disabled={currentPage === 1 || !totalPages} className={style.buttons}>{'<<'}</button>
+                <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1 || !totalPages} className={style.buttons}>{'<prev>'}</button>
+                {
+                    pages.map((page) => {
+                        return <button key={page} onClick={() => handlePageChange(page)} disabled={page === currentPage} className={style.buttons}>{page}</button> 
+                    })
+                }
+                <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages || totalPages === 0} className={style.buttons}>{'<next>'}</button>
+                <button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages || totalPages === 0} className={style.buttons}>{'>>'}</button>
+            </div>
+            <div className={style.pages}>
+                { totalPages === 0 ? <span>Page: 0/{totalPages}</span> : <span>Page: {currentPage} of {totalPages}</span>}
+            </div>
         </div>
     )
 };
