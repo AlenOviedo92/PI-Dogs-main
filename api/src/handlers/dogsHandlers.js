@@ -5,7 +5,7 @@ const getDogsHandler = async(req, res) => {
     try {
         const results = name ? await getDogByName(name) : await getAllDogs();
         if(results.length === 0) {
-            res.status(200).send(`La raza de perros ${name} no existe`); 
+            res.status(200).send(`The "${name}" dog breed does not exist`); 
         } else {
             res.status(200).json(results); 
         }
@@ -33,7 +33,7 @@ const createDogHandler = async(req, res) => {
     const { image, name, height, weight, life_span, temperaments } = req.body;
     try {
         const newDog = await createDog(image, name, height, weight, life_span, temperaments);
-        return res.status(201).json(newDog)
+        return res.status(201).json(newDog);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }

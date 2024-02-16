@@ -42,10 +42,24 @@
     cursor: pointer;
 }
 
+.form-container button:disabled {
+    border: 2px solid #adb5bd;
+    background-color: #ced4da;
+    color: #adb5bd;
+    cursor: default;
+}
+
 .form-container button:hover {
     border: 2px solid #333d29;
     color: #333d29;
     background-color: #dad7cd;
+}
+
+.form-container button:disabled:hover {
+    border: 2px solid #adb5bd;
+    background-color: #ced4da;
+    color: #adb5bd;
+    cursor: default;
 }
 
 .form-container h1 {

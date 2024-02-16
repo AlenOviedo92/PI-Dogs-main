@@ -8,11 +8,14 @@ const getAllTemperaments = async() => {
     const temperamentsArr = temperamentsRawFilter.map((string) => {
         return string.split(', ');
     });
-    const temperamentsRepeated = temperamentsArr.map((arr) => {
+
+    const temperamentsRepeated = [];
+    temperamentsArr.map((arr) => {
         for(let i = 0; i < arr.length; i++) {
-            return arr[i];
+            temperamentsRepeated.push(arr[i]);
         }
     });
+
     const temperaments = [...new Set(temperamentsRepeated)];                                        //Elimino los temperamentos repetidos
 
     const temperamentsDatabase = await Temperament.findAll();
@@ -24,7 +27,7 @@ const getAllTemperaments = async() => {
         });
     }
     const allTemperaments = await Temperament.findAll();
-    return allTemperaments/*temperaments*/;
+    return allTemperaments;
 };
 
 module.exports = {

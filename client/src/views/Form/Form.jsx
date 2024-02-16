@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTemperaments } from '../../redux/actions';
+import { validate, convertArray, formCleanDogs, repeatedDog, cleanNewForm } from '../../utils';
 import axios from 'axios';
-import { validate, convertArray } from '../../utils';
 import style from './Form.module.css';
 
 const Form = () => {
@@ -11,6 +11,7 @@ const Form = () => {
     useEffect(() => { dispatch(getTemperaments()) }, [dispatch]);
 
     const temperaments = useSelector(state => state.temperaments);
+    const dogs = useSelector(state => state.dogs);
 
     const [form, setForm] = useState({
         name: '',
@@ -53,13 +54,17 @@ const Form = () => {
             name: form.name,
             height: form.minHeight + ' - ' + form.maxHeight,
             weight: form.minWeight + ' - ' + form.maxWeight,
-            life_span: form.life_span,
+            life_span: form.life_span + ' years',
             temperaments: form.temperament
         };
         //console.log(newForm);
-        axios.post('http://localhost:3001/dogs/', newForm)                       //Como segundo parámetro del .post() va el form(Dog a crear)
-        .then(res => alert('Raza creada exitosamente'))
-        .catch(err => alert(err));
+        if(!repeatedDog(cleanNewForm(newForm), formCleanDogs(dogs))) {          //Si la raza NO esta repetida, la creo
+            axios.post('http://localhost:3001/dogs/', newForm)                  //Como segundo parámetro del .post() va el form(Dog a crear)
+            .then(res => alert('Successfully created dog breed'))
+            .catch(err => alert(err));
+        } else {
+            alert('Repeated dog breed');
+        }
     };
 
     return(
@@ -92,7 +97,7 @@ const Form = () => {
                     <input type='text' value={form.life_span} onChange={handleOnChange} name='life_span' />
                 </div>
                 <div>
-                    <label>Temperaments: </label>
+                    <label>Temperament: </label>
                     <select multiple onChange={selectHandler}/*size='51' className={style.select}*/> 
                         {temperaments.map((temperament) => {
                             return <option key={temperament.id} value={temperament.id}>{temperament.name}</option>
@@ -100,7 +105,7 @@ const Form = () => {
                     </select>
                 </div>
                 <div className={style['button-container']}>
-                    <button type='submit' disabled = {!form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperament.length}>CREATE</button>
+                    <button type='submit' disabled={!form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperament.length || errors.name || errors.maxHeight || errors.minHeight || errors.maxWeight || errors.minWeight}>CREATE</button>
                 </div>
             </div>
         </form>
