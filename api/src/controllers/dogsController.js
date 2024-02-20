@@ -27,7 +27,7 @@ const getDogByName = async(name) => {
 
 const getAllDogs = async() => {
     const databaseDogsRaw = await Dog.findAll(
-        {include: {                                                                                                 //Para incluir los temperamentos asociados a los Dogs de la DB
+        {include: {                                                                                               //Para incluir los temperamentos asociados a los Dogs de la DB
                     model: Temperament,
                     attributes: ['name'],
                     as: 'Temperaments',
@@ -37,7 +37,7 @@ const getAllDogs = async() => {
                 }
         }
     );
-    const databaseDogs = databaseDogsRaw.map((dog) => cleanTemperaments(dog));                                       //Para obtener los temperamentos organizados en un solo string(normalizados con la API)
+    const databaseDogs = databaseDogsRaw.map((dog) => cleanTemperaments(dog));                                    //Para obtener los temperamentos organizados en un solo string(normalizados con la API)
     const apiDogsRaw = (await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`)).data;
     const apiDogs = cleanPropsDogs(apiDogsRaw);
     const results = [...databaseDogs, ...apiDogs];
@@ -66,8 +66,8 @@ const getDogById = async(id, source) => {
     }
 };
 
-const createDog = async(image, name, height, weight, life_span, temperaments) => {                  //Fn async porque trabaja con los métodos del modelo, y dichos métodos retornan promesas
-    const newDog = await Dog.create({ image, name, height, weight, life_span });                    //Dog.create me retorna una preomesa, por eso se hace await
+const createDog = async(image, name, height, weight, life_span, temperaments) => {                                  //Fn async porque trabaja con los métodos del modelo, y dichos métodos retornan promesas
+    const newDog = await Dog.create({ image, name, height, weight, life_span });                                    //Dog.create me retorna una preomesa, por eso se hace await
     await newDog.addTemperament(temperaments);
     return newDog;
 };

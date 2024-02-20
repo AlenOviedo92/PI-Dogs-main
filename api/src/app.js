@@ -14,7 +14,7 @@ server.name = 'API';
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));               //el .use() le indica a la request entrar o pasar por lo que está entre ()
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
-server.use(morgan('dev'));                                                          //morgan es un Middleware cuya función es decir que tipo de usuarios tienen acceso a  la App
+server.use(morgan('dev'));                                                          
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');               //update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');

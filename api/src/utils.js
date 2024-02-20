@@ -29,7 +29,7 @@ const cleanTemperaments = (obj) => {                                            
 
 const validate = (req, res, next) => {                                                          //Ya que recibe next como parámetro es un Middleware
     const { image, name, height, weight, life_span, temperaments } = req.body;
-    //if(!image) return res.status(400).json({ error: 'Agregue la propiedad image'});
+    if(!image) return res.status(400).json({ error: 'Agregue la propiedad image'});
     if(!name) return res.status(400).json({ error: 'Agregue la propiedad name'});
     if(!height) return res.status(400).json({ error: 'Agregue la propiedad heigth'});
     if(!weight) return res.status(400).json({ error: 'Agregue la propiedad weigth'});

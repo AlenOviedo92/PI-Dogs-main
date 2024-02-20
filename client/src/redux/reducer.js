@@ -38,7 +38,6 @@ const reducer = (state=initialState, action) => {
         case CLEAR_DOG:
             return { ...state, dog: {} }
         default:
-            //console.log('Unhandled action:', action.type);
             return { ...state };
     }
 };

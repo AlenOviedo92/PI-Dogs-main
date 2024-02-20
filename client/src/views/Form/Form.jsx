@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTemperaments } from '../../redux/actions';
+import { getTemperaments, getDogs } from '../../redux/actions';
 import { validate, convertArray, formCleanDogs, repeatedDog, cleanNewForm } from '../../utils';
 import axios from 'axios';
 import style from './Form.module.css';
@@ -9,6 +9,7 @@ const Form = () => {
     const dispatch = useDispatch();
 
     useEffect(() => { dispatch(getTemperaments()) }, [dispatch]);
+    useEffect(() => { dispatch(getDogs()) }, [dispatch]);
 
     const temperaments = useSelector(state => state.temperaments);
     const dogs = useSelector(state => state.dogs);
@@ -20,7 +21,8 @@ const Form = () => {
         minWeight: '',
         maxWeight: '',
         life_span: '',
-        temperament: []
+        temperaments: [],
+        image: ''
     });
 
     const [errors, setErrors] = useState({                                      //Creo este estado para realizar las validaciones
@@ -30,7 +32,8 @@ const Form = () => {
         minWeight: '',
         maxWeight: '',
         life_span: '',
-        temperament: []
+        temperaments: [],
+        image: ''
     });
 
     const handleOnChange = (event) => {                                         //Para poder cambiar los inputs del form debo cambiar el estado local. Al hacer cambios en los inputs se ejecutará una fn que modifica el estado local
@@ -43,21 +46,22 @@ const Form = () => {
     const selectHandler = (event) => {                                          //Con esta fn capturo las opciones de temperamnts seleccionadas por el usuario                                     
         setForm({ 
             ...form, 
-            temperament: form.temperament.length !== 0 ? convertArray(form.temperament.join(', ') + ', ' + event.target.value) : convertArray(event.target.value) 
+            temperaments: form.temperaments.length !== 0 ? convertArray(form.temperaments.join(', ') + ', ' + event.target.value) : convertArray(event.target.value) 
         });
     };
 
     const submitHandler = (event) => {
         event.preventDefault();                                                 //Para evitar que al hacer click en CREATE se recargue la página y se me borren los datos ingresados
-        //console.log(form);                                                    //Aquí consologueo el estado(dog) que se guardará en la DB
+
         const newForm = {
             name: form.name,
             height: form.minHeight + ' - ' + form.maxHeight,
             weight: form.minWeight + ' - ' + form.maxWeight,
             life_span: form.life_span + ' years',
-            temperaments: form.temperament
+            temperaments: form.temperaments,
+            image: form.image
         };
-        //console.log(newForm);
+        
         if(!repeatedDog(cleanNewForm(newForm), formCleanDogs(dogs))) {          //Si la raza NO esta repetida, la creo
             axios.post('http://localhost:3001/dogs/', newForm)                  //Como segundo parámetro del .post() va el form(Dog a crear)
             .then(res => alert('Successfully created dog breed'))
@@ -68,9 +72,13 @@ const Form = () => {
     };
 
     return(
-        <form onSubmit={submitHandler} className={style.form}>
+        <form onSubmit={submitHandler} id='form' className={style.form}>
             <div className={style['form-container']}> 
                 <h1 className={style.h1}>CREATE DOG BREED</h1>
+                <div>
+                    <label>Image: </label>
+                    <input type='text' onChange={handleOnChange} name='image' />
+                </div>
                 <div>
                     <label>Name: </label>
                     <input type='text' value={form.name} onChange={handleOnChange} name='name' />
@@ -98,14 +106,14 @@ const Form = () => {
                 </div>
                 <div>
                     <label>Temperament: </label>
-                    <select multiple onChange={selectHandler}/*size='51' className={style.select}*/> 
+                    <select multiple onChange={selectHandler}/*size='51'*/> 
                         {temperaments.map((temperament) => {
                             return <option key={temperament.id} value={temperament.id}>{temperament.name}</option>
                         })}
                     </select>
                 </div>
                 <div className={style['button-container']}>
-                    <button type='submit' disabled={!form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperament.length || errors.name || errors.maxHeight || errors.minHeight || errors.maxWeight || errors.minWeight}>CREATE</button>
+                    <button type='submit' disabled={!form.image || !form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperaments.length || errors.name || errors.maxHeight || errors.minHeight || errors.maxWeight || errors.minWeight}>CREATE</button>
                 </div>
             </div>
         </form>

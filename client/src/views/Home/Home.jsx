@@ -65,7 +65,7 @@ const Home = () => {
     const pageSize = pagination?.pageSize || 8;
     const currentPage = pagination?.currentPage || 1;
     const changePages = (page) => {
-        console.log('Cambiando la página a:', page);
+        //console.log('Cambiando la página a:', page);
         dispatch(chagePage(page));
     };
 

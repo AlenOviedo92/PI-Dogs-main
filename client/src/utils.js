@@ -16,10 +16,8 @@ const formCleanDogs = (arr) => {
             height: dog.height,
             weight: dog.weight,
             life_span: dog.life_span,
-            // temperaments: dog.temperaments
         }
     });
-    console.log(newArr);
     return newArr;
 };
 
@@ -126,6 +124,7 @@ const validateSearchBar = (searchBar, setErrors, errors) => {
     }
     if(searchBar.name === '') setErrors((errors) => ({ ...errors, name: '' }));
 };
+
 
 export { convertArray, average, formCleanDogs, cleanNewForm, repeatedDog, combineFilters, validate, validateSearchBar };
 
