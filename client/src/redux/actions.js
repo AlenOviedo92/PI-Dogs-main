@@ -1,30 +1,34 @@
 import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG } from './action-types';
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const getDogs = () => {
     return async function(dispatch) {
-        const dogs = (await axios.get('http://localhost:3001/dogs/')).data;
+        const dogs = (await axios.get(`${backendUrl}/dogs/`)).data;
         dispatch({ type: GET_DOGS, payload: dogs });
     };
 };
 
 export const getDog = (id) => {
     return async function(dispatch) {
-        const dog = (await axios.get(`http://localhost:3001/dogs/${id}`)).data;
+        const dog = (await axios.get(`${backendUrl}/dogs/${id}`)).data;
         dispatch({ type: GET_DOG, payload: dog });
     };
 };
 
 export const getTemperaments = () => {
     return async function(dispatch) {
-        const temperaments = (await axios.get('http://localhost:3001/temperaments/')).data;
+        const temperaments = (await axios.get(`${backendUrl}/temperaments/`)).data;
         dispatch({ type: GET_TEMPERAMENTS, payload: temperaments });
     };
 };
 
 export const getDogsByName = (name) => {
     return async function(dispatch) {
-        const dogs = (await axios.get(`http://localhost:3001/dogs?name=${name}`)).data;
+        const dogs = (await axios.get(`${backendUrl}/dogs?name=${name}`)).data;
         dispatch({ type: GET_DOGS_BY_NAME, payload: dogs });
     };
 };

@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTemperaments, getDogs } from '../../redux/actions';
 import { validate, convertArray, formCleanDogs, repeatedDog, cleanNewForm } from '../../utils';
+import dotenv from 'dotenv';
 import axios from 'axios';
 import style from './Form.module.css';
+
+dotenv.config();
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const Form = () => {
     const dispatch = useDispatch();
@@ -63,7 +67,7 @@ const Form = () => {
         };
         
         if(!repeatedDog(cleanNewForm(newForm), formCleanDogs(dogs))) {          //Si la raza NO esta repetida, la creo
-            axios.post('http://localhost:3001/dogs/', newForm)                  //Como segundo parámetro del .post() va el form(Dog a crear)
+            axios.post(`${backendUrl}/dogs/`, newForm)                  //Como segundo parámetro del .post() va el form(Dog a crear)
             .then(res => alert('Successfully created dog breed'))
             .catch(err => alert(err));
         } else {
