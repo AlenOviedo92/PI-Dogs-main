@@ -18,13 +18,15 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Este módulo tiene la responsabilidad de iniciar la App
+require('dotenv').config();
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const { DB_PORT } = process.env;
 
 // Syncing all the models at once.
 conn.sync({ alter: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at port 3001'); // eslint-disable-line no-console
+  server.listen(DB_PORT, () => {
+    console.log(`%s listening at port ${DB_PORT}`); // eslint-disable-line no-console
   });
 });
 
