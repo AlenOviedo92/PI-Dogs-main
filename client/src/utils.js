@@ -9,29 +9,8 @@ const average = (string) => {
     else if(arr.length === 2) return (+arr[0] + +arr[1])/2;
 };
 
-const formCleanDogs = (arr) => {
-    const newArr = arr.map((dog) => {
-        return {
-            name: dog.name,
-            height: dog.height,
-            weight: dog.weight,
-            life_span: dog.life_span,
-        }
-    });
-    return newArr;
-};
-
-const cleanNewForm = (obj) => {
-    return {
-        name: obj.name,
-        height: obj.height,
-        weight: obj.weight,
-        life_span: obj.life_span,
-    };
-};
-
-const repeatedDog = (obj, arr) => {
-    const repeatedDog = arr.filter((dog) => JSON.stringify(dog) === JSON.stringify(obj));
+const repeatedDog = (name, arr) => {
+    const repeatedDog = arr.filter((dog) => dog.name === name);
     if(repeatedDog.length === 0) return false;
     return true;
 };
@@ -125,7 +104,6 @@ const validateSearchBar = (searchBar, setErrors, errors) => {
     if(searchBar.name === '') setErrors((errors) => ({ ...errors, name: '' }));
 };
 
-
-export { convertArray, average, formCleanDogs, cleanNewForm, repeatedDog, combineFilters, validate, validateSearchBar };
+export { convertArray, average, repeatedDog, combineFilters, validate, validateSearchBar };
 
 //NOTA: Cuando uso setErrors() varias veces en el mismo bloque de código, debo escribir su parámetro, NO como un obj, sino como una fn: ((errors) => ({...errors, 'propiedad a actualizar' }))

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTemperaments, getDogs } from '../../redux/actions';
-import { validate, convertArray, formCleanDogs, repeatedDog, cleanNewForm } from '../../utils';
+import { validate, convertArray, repeatedDog } from '../../utils';
 import dotenv from 'dotenv';
 import axios from 'axios';
 import style from './Form.module.css';
@@ -47,11 +47,19 @@ const Form = () => {
         setForm({ ...form, [property]: value });                                //Hago una copia del estado(para no perder la info de los demás inputs) y modifico el valor de la propiedad de interés(La acción de cambiar el estado demora un poco)
     };
 
-    const selectHandler = (event) => {                                          //Con esta fn capturo las opciones de temperamnts seleccionadas por el usuario                                     
-        setForm({ 
-            ...form, 
-            temperaments: form.temperaments.length !== 0 ? convertArray(form.temperaments.join(', ') + ', ' + event.target.value) : convertArray(event.target.value) 
-        });
+    const selectHandler = (event) => {                                          //Con esta fn capturo las opciones de temperamnts seleccionadas por el usuario
+        if(!form.temperaments.includes(event.target.value)) {
+            setForm({ 
+                ...form, 
+                temperaments: form.temperaments.length !== 0 ? convertArray(form.temperaments.join(', ') + ', ' + event.target.value) : convertArray(event.target.value) 
+            });
+        } else {
+            const updatedTemperaments = form.temperaments.filter((temp) => temp !== event.target.value);
+            setForm({
+                ...form,
+                temperaments: updatedTemperaments
+            });
+        }                                 
     };
 
     const submitHandler = (event) => {
@@ -66,7 +74,7 @@ const Form = () => {
             image: form.image
         };
         
-        if(!repeatedDog(cleanNewForm(newForm), formCleanDogs(dogs))) {          //Si la raza NO esta repetida, la creo
+        if(!repeatedDog(form.name, dogs)) {                             //Si la raza NO esta repetida, la creo
             axios.post(`${backendUrl}/dogs/`, newForm)                  //Como segundo parámetro del .post() va el form(Dog a crear)
             .then(res => alert('Successfully created dog breed'))
             .catch(err => alert(err));
@@ -80,13 +88,13 @@ const Form = () => {
             <div className={style['form-container']}> 
                 <h1 className={style.h1}>CREATE DOG BREED</h1>
                 <div>
-                    <label>Image: </label>
+                    <label>Image URL: </label>
                     <input type='text' onChange={handleOnChange} name='image' />
                 </div>
                 <div>
                     <label>Name: </label>
                     <input type='text' value={form.name} onChange={handleOnChange} name='name' />
-                    {errors.name && <span style={{color: 'red'}}>{errors.name}</span>}
+                    {errors.name && <span className={style['error-name']}>{errors.name}</span>}
                 </div>
                 <div>
                     <label>Minimum height: </label>
@@ -94,7 +102,7 @@ const Form = () => {
 
                     <label>Maximum height: </label>
                     <input type='text' value={form.maxHeight} onChange={handleOnChange} name='maxHeight' />
-                    {errors.maxHeight && <span style={{color: 'red'}}>{errors.maxHeight}</span>}
+                    {errors.maxHeight && <span className={style['error-size']}>{errors.maxHeight}</span>}
                 </div>
                 <div>
                     <label>Minimum weight: </label>
@@ -102,7 +110,7 @@ const Form = () => {
 
                     <label>Maximum weight: </label>
                     <input type='text' value={form.maxWeight} onChange={handleOnChange} name='maxWeight' />
-                    {errors.maxWeight && <span style={{color: 'red'}}>{errors.maxWeight}</span>}
+                    {errors.maxWeight && <span className={style['error-size']}>{errors.maxWeight}</span>}
                 </div>
                 <div>
                     <label>Life span: </label>

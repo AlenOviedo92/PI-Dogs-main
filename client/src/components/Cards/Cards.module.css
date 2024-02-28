@@ -7,3 +7,9 @@
     gap: 1em;
     justify-content: center;                        /* Centra las tarjetas horizontalmente */
 }
+
+.h1 {
+    font-size: 28px;
+    font-family: Quantico, sans-serif;
+    color: black;
+}

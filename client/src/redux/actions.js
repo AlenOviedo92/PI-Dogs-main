@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG } from './action-types';
+import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG, SAVE_VALUE_SEARCHBAR } from './action-types';
 import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -14,9 +14,14 @@ export const getDogs = () => {
 
 export const getDog = (id) => {
     return async function(dispatch) {
-        const dog = (await axios.get(`${backendUrl}/dogs/${id}`)).data;
-        dispatch({ type: GET_DOG, payload: dog });
-    };
+        try {
+            const dog = (await axios.get(`${backendUrl}/dogs/${id}`)).data;
+            dispatch({ type: GET_DOG, payload: dog });
+        
+        } catch (error) {
+            alert('Hay un error en el ID, recargar la página');
+        }
+    }; 
 };
 
 export const getTemperaments = () => {
@@ -51,4 +56,8 @@ export const chagePage = (page) => {
 
 export const clearDog = () => {
     return { type: CLEAR_DOG };
+};
+
+export const saveValueSearchBar = (name) => {
+    return { type: SAVE_VALUE_SEARCHBAR, payload: name };
 };

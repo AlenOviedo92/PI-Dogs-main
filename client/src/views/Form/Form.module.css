@@ -26,6 +26,25 @@
 
 .form-container div {
     margin-bottom: 12px;                    /* Ajusta el valor según el espacio deseado entre divs */
+    position: relative;                     /* Establece el div padre como relativo para que los mensajes de error se posicionen relativos a él */
+}
+
+.error-size {
+    color: red;
+    font-size: 16px;
+    position: absolute;                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
+    bottom: 5px;                            /* Lo posiciona en la parte inferior del contenedor */
+    left: 0;                                /* Lo posiciona en la parte izquierda del contenedor */
+    transform: translateX(145%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
+}
+
+.error-name {
+    color: red;
+    font-size: 16px;
+    position: absolute;                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
+    bottom: 5px;                            /* Lo posiciona en la parte inferior del contenedor */
+    left: 0;                                /* Lo posiciona en la parte izquierda del contenedor */
+    transform: translateX(108%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
 }
 
 .form-container button {
@@ -63,8 +82,8 @@
 }
 
 .form-container h1 {
-    display: flex;                          /* Centra el h1 */
-    justify-content: center;                /* Centra el h1 */
+    display: flex;                              /* Centra el h1 */
+    justify-content: center;                    /* Centra el h1 */
     font-size: 35px;
     font-family: Saira, sans-serif;
     margin: 40px;
@@ -78,8 +97,8 @@
 }
 
 .button-container {
-    display: flex;                          /* Centre el button CREATE */
-    justify-content: center;                /* Centre el button CREATE */
+    display: flex;                              /* Centre el button CREATE */
+    justify-content: center;                    /* Centre el button CREATE */
 }
 
 

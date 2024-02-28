@@ -6,6 +6,19 @@
     justify-content: center;
 }
 
+.input-container {
+    position: relative;
+}
+
+.searchbar-error {
+    color: red;
+    font-size: 16px;
+    position: absolute;                                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
+    top: 26%;                                               /* Lo posiciona en la parte inferior del contenedor */
+    left: 28%;                                              /* Lo posiciona en la parte izquierda del contenedor */
+    transform: translateX(145%);
+}
+
 .searchbar-container label {
     margin: 0 8px;                                          /* Ajusta el espaciado entre los elementos <label> */
 }
@@ -56,4 +69,11 @@
 /* CARDS CONTAINER */
 .cards-container {
     padding: 25px;
+}
+
+.h1 {
+    font-size: 26px;
+    font-family: Quantico, sans-serif;
+    color: black;
+    text-align: center;
 }

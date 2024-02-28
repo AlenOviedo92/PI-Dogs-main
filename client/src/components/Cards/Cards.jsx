@@ -14,7 +14,7 @@ const Cards = ({ visibleDogs }) => {
     
     return(
         <div className={style.container}>
-            {visibleDogs.map((dog) => {
+            {typeof visibleDogs === 'string' ? <h1 className={style.h1}>{visibleDogs}</h1> : visibleDogs.map((dog) => {
                 return (
                     <div key={dog.id}>
                         <Card

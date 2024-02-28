@@ -1,7 +1,7 @@
 import Cards from '../../components/Cards/Cards';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getDogsByName, getTemperaments, originFilter, temperamentFilter, order, chagePage } from '../../redux/actions';
+import { getDogsByName, getTemperaments, originFilter, temperamentFilter, order, chagePage, saveValueSearchBar } from '../../redux/actions';
 import { validateSearchBar, combineFilters } from '../../utils';
 import Pagination from '../../components/Pagination/Pagination';
 import style from './Home.module.css';
@@ -24,10 +24,12 @@ const Home = () => {
 
     const clickHandler = (event) => {
         dispatch(getDogsByName(searchBar.name));
+        dispatch(saveValueSearchBar(searchBar.name));
         changePages(1);
     };
     
     const dogsByName = useSelector(state => state.dogsByName);
+    const searchBarValue = useSelector(state => state.searchBarValue);
 
     //FILTER BY ORIGIN
     const handleOriginFilter = (event) => {
@@ -71,16 +73,18 @@ const Home = () => {
 
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize, totalDogs);
-    const visibleDogs = filteredDogs.slice(startIndex, endIndex);
-    const visibleDogsSearchBar = filteredDogsSearchBar.slice(startIndex, endIndex);                          //Hace parte de la SearchBar
+    const visibleDogs = filteredDogs.length ? filteredDogs.slice(startIndex, endIndex) : 'No Search Results';
+    const visibleDogsSearchBar = filteredDogsSearchBar.length ? filteredDogsSearchBar.slice(startIndex, endIndex) : 'No Search Results';                          //Hace parte de la SearchBar
 
     return(
         <div>
             <div className={style['searchbar-container']}>
-                <label className={style.label}>Breed name: </label>
-                <input type='search' value={searchBar.name} onChange={changeHandler} name='name' placeholder='search...' className={style.input}/>
+                <div className={style['input-container']}>
+                    <label className={style.label}>Breed name: </label>
+                    <input type='search' value={searchBar.name} onChange={changeHandler} name='name' placeholder='search...' className={style.input}/>
+                </div>
                 <button type='submit' onClick={clickHandler} className={style.button}>SEND</button>
-                {errors.name && <span style={{color: 'red'}}>{errors.name}</span>}
+                {errors.name && <span className={style['searchbar-error']}>{errors.name}</span>}
             </div>
             
             <div className={style['buttons-container']}>
@@ -104,20 +108,20 @@ const Home = () => {
                 </select>
 
                 <select onChange={handleOrder}>
-                    <option value='AW'>Descending order (weight)</option>                                         {/*OJO CON ESTE ORDEN???*/}
                     <option value='DW'>Ascending order (weight)</option>
+                    <option value='AW'>Descending order (weight)</option>                                         {/*OJO CON ESTE ORDEN???*/}
                 </select>
             </div>
 
             <div className={style['cards-container']}>
                 {
-                    !searchBar.name ? <Cards visibleDogs={visibleDogs} /> : typeof dogsByName === 'string' ? <p>{dogsByName}</p> :
+                    !searchBarValue ? <Cards visibleDogs={visibleDogs} /> : typeof dogsByName === 'string' ? <h1 className={style.h1}>{dogsByName}</h1> :
                     <Cards visibleDogs={visibleDogsSearchBar} />
                 }
             </div>
             
             <Pagination
-                totalDogs={!searchBar.name ? totalDogs : typeof dogsByName === 'string' ? 0 : totalDogsSearchBar}
+                totalDogs={!searchBarValue ? totalDogs : typeof dogsByName === 'string' ? 0 : totalDogsSearchBar}
                 pageSize={pageSize}
                 currentPage={currentPage} 
                 onPageChange={(newPage) => changePages(newPage)}    
