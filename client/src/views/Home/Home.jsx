@@ -17,13 +17,24 @@ const Home = () => {
         name: '',
     });
 
+    const [isLoading, setIsLoading] = useState(true);                               // Me sirve para renderizar "Loading..." mientras el estado dogsByName se carga
+
+    useEffect(() => { if(dogsByName.length) {                                       // Este useEffect es necesario para que al desmontarse y volverse a montar Home, se renderize el estado anterior(dogsByName) y no se quede colgado en Loading...
+        setIsLoading(false);
+    } }, []);
+
     const changeHandler = (event) => {
         validateSearchBar({ ...searchBar, [event.target.name]: event.target.value }, setErrors, errors);
         setSearchBar({ ...searchBar, [event.target.name]: event.target.value });
     };
 
     const clickHandler = (event) => {
-        dispatch(getDogsByName(searchBar.name));
+        dispatch(getDogsByName(searchBar.name))
+        .then(() => setIsLoading(false))                                            // Al momento que el estado dogsByName se carga completamente, cambio isLoading a false
+        .catch(error => {
+            setIsLoading(false);                                                    // Asegúrate de manejar cualquier error aquí
+            console.error('Error fetching dogsByName:', error);
+        })
         dispatch(saveValueSearchBar(searchBar.name));
         changePages(1);
     };
@@ -54,12 +65,12 @@ const Home = () => {
     };
 
     //COMBINATION OF FILTERS AND SORTS//
-    const filters = useSelector(state => state.filters);                                                    //Obtendo los filtros y el orden acumulados en el Estado Global
+    const filters = useSelector(state => state.filters);                                                              //Obtendo los filtros y el orden acumulados en el Estado Global
     const dogs = useSelector(state => state.dogs);
 
     const filteredDogs = combineFilters(dogs, filters);
-    const filteredDogsSearchBar = typeof dogsByName !== 'string' ? combineFilters(dogsByName, filters) : [];                                                //Hace parte de la SearchBar
-   
+    const filteredDogsSearchBar = typeof dogsByName !== 'string' ? combineFilters(dogsByName, filters) : [];          //Hace parte de la SearchBar
+
     //PAGINATION//
     const pagination = useSelector(state => state.pagination);
     const totalDogs = filteredDogs.length;
@@ -74,7 +85,7 @@ const Home = () => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize, totalDogs);
     const visibleDogs = filteredDogs.length ? filteredDogs.slice(startIndex, endIndex) : 'No Search Results';
-    const visibleDogsSearchBar = filteredDogsSearchBar.length ? filteredDogsSearchBar.slice(startIndex, endIndex) : 'No Search Results';                          //Hace parte de la SearchBar
+    const visibleDogsSearchBar = filteredDogsSearchBar.length ? filteredDogsSearchBar.slice(startIndex, endIndex) : 'No Search Results';      //Hace parte de la SearchBar
 
     return(
         <div>
@@ -115,7 +126,9 @@ const Home = () => {
 
             <div className={style['cards-container']}>
                 {
-                    !searchBarValue ? <Cards visibleDogs={visibleDogs} /> : typeof dogsByName === 'string' ? <h1 className={style.h1}>{dogsByName}</h1> :
+                    !searchBarValue ? <Cards visibleDogs={visibleDogs} /> : 
+                    typeof dogsByName === 'string' ? <h1 className={style.h1}>{dogsByName}</h1> :
+                    isLoading ? <h1 className={style.h1}>Loading...</h1> :
                     <Cards visibleDogs={visibleDogsSearchBar} />
                 }
             </div>
