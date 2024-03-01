@@ -1,15 +1,15 @@
 .detail-container{
-    border: 3px solid #582f0e;
+    border: 4px solid #582f0e;
     background-color: #c2c5aa;
-    border-radius: 10px;
-    width: 460px;                           
+    border-radius: 30px;
+    width: 475px;                           
     height: 600px;                          
     margin: 0 auto;                         /* Centrar el contenedor en la página */
     overflow: hidden; 
 }
 
 .detail-container img {
-    width: 460px;                           /* Ajusta la anchura de la imagen */
+    width: 475px;                           /* Ajusta la anchura de la imagen */
     height: 380px;                          /* Ajusta la altura de la imagen */
     overflow: hidden;                       /* Evita que la imagen desborde del contenedor */
 }

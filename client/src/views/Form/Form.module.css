@@ -4,8 +4,18 @@
     align-items: center;                    /* Para centrar el <form> */
 }
 
+.background-container {
+    background-image: url('../../images/dogsFondo.avif');
+    background-size: contain;
+    background-position: center;
+    height: 100vh;                          /*Ajusta esto según tus necesidades */
+    max-width: 100vw;
+    background-repeat: no-repeat;
+    padding: 110px;
+}
+
 .form-container {
-    border: 3px solid black;
+    border: 4px solid black;
     border-radius: 20px;
     background-color: #b6ad90;
     padding: 20px;                          /* Separa todos los elementos del border */
@@ -32,19 +42,21 @@
 .error-size {
     color: red;
     font-size: 16px;
+    font-weight: bold;
     position: absolute;                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
     bottom: 5px;                            /* Lo posiciona en la parte inferior del contenedor */
     left: 0;                                /* Lo posiciona en la parte izquierda del contenedor */
-    transform: translateX(145%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
+    transform: translateX(136%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
 }
 
 .error-name {
     color: red;
     font-size: 16px;
+    font-weight: bold;
     position: absolute;                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
     bottom: 5px;                            /* Lo posiciona en la parte inferior del contenedor */
     left: 0;                                /* Lo posiciona en la parte izquierda del contenedor */
-    transform: translateX(108%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
+    transform: translateX(98%);             /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
 }
 
 .form-container button {
@@ -100,6 +112,3 @@
     display: flex;                              /* Centre el button CREATE */
     justify-content: center;                    /* Centre el button CREATE */
 }
-
-
-

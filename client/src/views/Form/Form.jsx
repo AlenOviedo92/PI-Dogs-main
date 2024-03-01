@@ -74,8 +74,8 @@ const Form = () => {
             image: form.image
         };
         
-        if(!repeatedDog(form.name, dogs)) {                             //Si la raza NO esta repetida, la creo
-            axios.post(`${backendUrl}/dogs/`, newForm)                  //Como segundo parámetro del .post() va el form(Dog a crear)
+        if(!repeatedDog(form.name, dogs)) {                                     //Si la raza NO esta repetida, la creo
+            axios.post(`${backendUrl}/dogs/`, newForm)                          //Como segundo parámetro del .post() va el form(Dog a crear)
             .then(res => alert('Successfully created dog breed'))
             .catch(err => alert(err));
         } else {

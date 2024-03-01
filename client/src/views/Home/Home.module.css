@@ -15,7 +15,7 @@
     font-size: 16px;
     position: absolute;                                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
     top: 26%;                                               /* Lo posiciona en la parte inferior del contenedor */
-    left: 28%;                                              /* Lo posiciona en la parte izquierda del contenedor */
+    left: 33.5%;                                            /* Lo posiciona en la parte izquierda del contenedor */
     transform: translateX(145%);
 }
 

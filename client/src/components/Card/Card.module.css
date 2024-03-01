@@ -10,7 +10,9 @@
 
 .card:hover {
     background-color: #dad7cd;
-    color:  #344e41;;
+    color:  #344e41;
+    /* width: 385px;
+    height: 365; */
 }
 
 .card-image {
