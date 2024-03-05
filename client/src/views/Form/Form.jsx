@@ -67,8 +67,8 @@ const Form = () => {
 
         const newForm = {
             name: form.name,
-            height: form.minHeight + ' - ' + form.maxHeight,
-            weight: form.minWeight + ' - ' + form.maxWeight,
+            height: form.minHeight === form.maxHeight ? form.minHeight : form.minHeight + ' - ' + form.maxHeight,
+            weight: form.minWeight === form.maxWeight ? form.minWeight : form.minWeight + ' - ' + form.maxWeight,
             life_span: form.life_span + ' years',
             temperaments: form.temperaments,
             image: form.image
@@ -89,7 +89,8 @@ const Form = () => {
                 <h1 className={style.h1}>CREATE DOG BREED</h1>
                 <div>
                     <label>Image URL: </label>
-                    <input type='text' onChange={handleOnChange} name='image' />
+                    <input type='text' value={form.image} onChange={handleOnChange} name='image' />
+                    {errors.image && <span className={style['error-image']}>{errors.image}</span>}
                 </div>
                 <div>
                     <label>Name: </label>
@@ -115,6 +116,7 @@ const Form = () => {
                 <div>
                     <label>Life span: </label>
                     <input type='text' value={form.life_span} onChange={handleOnChange} name='life_span' />
+                    {errors.life_span && <span className={style['error-life-span']}>{errors.life_span}</span>}
                 </div>
                 <div>
                     <label>Temperament: </label>
@@ -125,7 +127,7 @@ const Form = () => {
                     </select>
                 </div>
                 <div className={style['button-container']}>
-                    <button type='submit' disabled={!form.image || !form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperaments.length || errors.name || errors.maxHeight || errors.minHeight || errors.maxWeight || errors.minWeight}>CREATE</button>
+                    <button type='submit' disabled={!form.image || !form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperaments.length || errors.name || errors.maxHeight || errors.minHeight || errors.maxWeight || errors.minWeight || errors.image || errors.life_span}>CREATE</button>
                 </div>
             </div>
         </form>

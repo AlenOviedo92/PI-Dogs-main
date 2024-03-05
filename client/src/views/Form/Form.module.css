@@ -8,7 +8,7 @@
     background-image: url('../../images/dogsFondo.avif');
     background-size: contain;
     background-position: center;
-    height: 100vh;                          /*Ajusta esto según tus necesidades */
+    height: 100vh;                          /* Ajusta esto según tus necesidades */
     max-width: 100vw;
     background-repeat: no-repeat;
     padding: 110px;
@@ -46,7 +46,7 @@
     position: absolute;                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
     bottom: 5px;                            /* Lo posiciona en la parte inferior del contenedor */
     left: 0;                                /* Lo posiciona en la parte izquierda del contenedor */
-    transform: translateX(136%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
+    transform: translateX(153.5%);          /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
 }
 
 .error-name {
@@ -56,14 +56,34 @@
     position: absolute;                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
     bottom: 5px;                            /* Lo posiciona en la parte inferior del contenedor */
     left: 0;                                /* Lo posiciona en la parte izquierda del contenedor */
-    transform: translateX(98%);             /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
+    transform: translateX(129%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
+}
+
+.error-image {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;                     
+    bottom: 5px;                            
+    left: 0;                                
+    transform: translateX(143%);             
+}
+
+.error-life-span {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;                     
+    bottom: 5px;                            
+    left: 0;                                
+    transform: translateX(153%);             
 }
 
 .form-container button {
-    width: 90px;                            /* Ajusta el ancho del botón */
-    height: 90px;                           /* Ajusta el alto del botón */
-    border-radius: 50%;                     /* Ajusta el radio del borde para que sea completamente redondo */
-    margin-top: 15px;                       /* Ajusta el espacio entre el último input y el botón */
+    width: 90px;                                /* Ajusta el ancho del botón */
+    height: 90px;                               /* Ajusta el alto del botón */
+    border-radius: 50%;                         /* Ajusta el radio del borde para que sea completamente redondo */
+    margin-top: 15px;                           /* Ajusta el espacio entre el último input y el botón */
     border: 2px solid #dad7cd;
     background-color: #333d29;
     color: #dad7cd;

@@ -71,10 +71,10 @@ const combineFilters = (arr, filters) => {
 };
 
 const validate = (form, setErrors, errors) => {                                                                     //Esta fn se encarga de hacer la validación del estado(local) del formulario. Si saco esta fn del componente debo pasarle como parámetros adicionales serErrors y errors
-    if(+form.maxHeight > +form.minHeight) {
+    if(+form.maxHeight >= +form.minHeight) {
         setErrors((errors) => ({ ...errors, maxHeight: '', minHeight: '' }));
     } else {
-        setErrors((errors) => ({ ...errors, maxHeight: 'The minimum height cannot be greater than or equal to the maximum height', minHeight: 'La altura mínima NO puede ser mayor o igual que la altura máxima' }));
+        setErrors((errors) => ({ ...errors, maxHeight: 'The minimum height cannot be greater than to the maximum height', minHeight: 'La altura mínima NO puede ser mayor que la altura máxima' }));
     }
     if(!form.maxHeight || !form.minHeight) setErrors((errors) => ({ ...errors, maxHeight: '', minHeight: '' }));
 
@@ -82,17 +82,32 @@ const validate = (form, setErrors, errors) => {                                 
     if(/^[A-Za-zñÑ\s]*$/.test(form.name)) {
         setErrors((errors) => ({ ...errors, name: '' }));
     } else {
-        setErrors((errors) => ({ ...errors, name: 'There is an error in the name property' }));
+        setErrors((errors) => ({ ...errors, name: 'There is an error in the name' }));
     }
     if(form.name === '') setErrors((errors) => ({ ...errors, name: '' }));
 
 
-    if(+form.maxWeight > +form.minWeight) {
+    if(+form.maxWeight >= +form.minWeight) {
         setErrors((errors) => ({ ...errors, maxWeight: '', minWeight: '' }));
     } else {
-        setErrors((errors) => ({ ...errors, maxWeight: 'The minimum weight cannot be greater than or equal to the maximum weight', minWeight: 'El peso mínimo NO puede ser mayor o igual que el peso máximo' }));
+        setErrors((errors) => ({ ...errors, maxWeight: 'The minimum weight cannot be greater than to the maximum weight', minWeight: 'El peso mínimo NO puede ser mayor que el peso máximo' }));
     }
     if(!form.maxWeight || !form.minWeight) setErrors((errors) => ({ ...errors, maxWeight: '', minWeight: '' }));
+    
+
+    if(/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/.test(form.image)) {
+        setErrors((errors) => ({ ...errors, image: '' }));
+    } else {
+        setErrors((errors) => ({ ...errors, image: 'The value entered is not a URL' }));
+    }
+    if(!form.image) setErrors((errors) => ({ ...errors, image: '' }));
+    
+
+    if(/^[0-9,-\s]*$/.test(form.life_span)) {
+        setErrors((errors) => ({ ...errors, life_span: '' }));
+    } else {
+        setErrors((errors) => ({ ...errors, life_span: 'The value entered is invalid' }));
+    }
 };
 
 const validateSearchBar = (searchBar, setErrors, errors) => {
