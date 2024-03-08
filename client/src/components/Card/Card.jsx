@@ -6,14 +6,20 @@ const Card = ({ id, image, name, temperaments, weight }) => {
     return(
         <Link to={`/detail/${id}`} className={style['link-without-underline']}>
             <div className={style.card}>
-                <div className={style['card-image']}>
-                    <img src={image} alt='Dog breed'/>
+                <div className={style.back}>
+                    <div className={style['card-image']}>
+                        <img src={image} alt='Dog breed'/>
+                    </div>
+                    <div className={style['card-content']}>
+                        <strong>Name: {name}</strong>
+                        <p>Temperaments: {temperaments}</p>
+                        <p>Weight: {weight}</p>
+                    </div>
                 </div>
-                <div className={style['card-content']}>
-                    <strong>Name: {name}</strong>
-                    <p>Temperaments: {temperaments}</p>
-                    <p>Weight: {weight}</p>
-                </div>
+
+                {/* <div className={style.front}>
+                    {name}
+                </div> */}
             </div>
         </Link>
     )
