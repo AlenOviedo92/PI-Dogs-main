@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG, SAVE_VALUE_SEARCHBAR } from "./action-types";
+import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG, SAVE_VALUE_SEARCHBAR, DELETE_DOG } from "./action-types";
 
 const initialState = {
     dogs: [],
@@ -16,6 +16,7 @@ const initialState = {
         pageSize: 8,
     },
     searchBarValue: '',
+    removedDog: {}
 };
 
 const reducer = (state=initialState, action) => {
@@ -40,6 +41,8 @@ const reducer = (state=initialState, action) => {
             return { ...state, dog: {} };
         case SAVE_VALUE_SEARCHBAR:
             return { ...state, searchBarValue: action.payload };
+        case DELETE_DOG:
+            return { ...state, removedDog: action.payload }
         default:
             return { ...state };
     }

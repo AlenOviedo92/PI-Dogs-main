@@ -1,4 +1,4 @@
-const { getDogByName, getAllDogs, getDogById, createDog } = require('../controllers/dogsController');
+const { getDogByName, getAllDogs, getDogById, createDog, removeDog } = require('../controllers/dogsController');
 
 const getDogsHandler = async(req, res) => {
     const { name } = req.query;
@@ -39,10 +39,21 @@ const createDogHandler = async(req, res) => {
     }
 };
 
+const deleteDogHandler = async(req, res) => {
+    const { id } = req.params;
+    try {
+        const dogRemoved = await removeDog(id);
+        return res.status(200).json(dogRemoved);
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+};
+
 module.exports = {
     getDogsHandler,
     getDogHandler,
-    createDogHandler
+    createDogHandler,
+    deleteDogHandler
 };
 
 //NOTA: Tratar de que el handler NO interactúe con la DB

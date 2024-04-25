@@ -72,9 +72,19 @@ const createDog = async(image, name, height, weight, life_span, temperaments) =>
     return newDog;
 };
 
+const removeDog = async(id) => {
+    const removedDog = await Dog.findByPk(id);
+    const deletedDog = removedDog;
+    if(removedDog) {
+        await removedDog.destroy();
+        return deletedDog;
+    }
+};
+
 module.exports = {
     getDogByName,
     getAllDogs,
     getDogById,
     createDog,
+    removeDog
 };

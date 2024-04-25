@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG, SAVE_VALUE_SEARCHBAR } from './action-types';
+import { GET_DOGS, GET_DOG, GET_TEMPERAMENTS, GET_DOGS_BY_NAME, FILTER_ORIGIN, FILTER_TEMPERAMENT, ORDER, CHANGE_PAGE, CLEAR_DOG, SAVE_VALUE_SEARCHBAR, DELETE_DOG } from './action-types';
 import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -60,4 +60,12 @@ export const clearDog = () => {
 
 export const saveValueSearchBar = (name) => {
     return { type: SAVE_VALUE_SEARCHBAR, payload: name };
+};
+
+export const deleteDog = (id) => {
+    return async function(dispatch) {
+        const removedDog = (await axios.delete(`${backendUrl}/dogs/${id}`)).data;
+        console.log(removedDog);
+        dispatch({ type: DELETE_DOG, payload: removedDog});
+    }
 };
