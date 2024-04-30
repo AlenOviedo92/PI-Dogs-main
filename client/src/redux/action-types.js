@@ -9,3 +9,4 @@ export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const CLEAR_DOG = 'CLEAR_DOG';
 export const SAVE_VALUE_SEARCHBAR = 'SAVE_VALUE_SEARCHBAR';
 export const DELETE_DOG = 'DELETE_DOG';
+export const UPDATE_DOG = 'UPDATE_DOG';

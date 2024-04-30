@@ -19,9 +19,12 @@ const Home = () => {
 
     const [isLoading, setIsLoading] = useState(true);                               // Me sirve para renderizar "Loading..." mientras el estado dogsByName se carga
 
+    const dogsByName = useSelector(state => state.dogsByName);
+    const searchBarValue = useSelector(state => state.searchBarValue);
+
     useEffect(() => { if(dogsByName.length) {                                       // Este useEffect es necesario para que al desmontarse y volverse a montar Home, se renderize el estado anterior(dogsByName) y no se quede colgado en Loading...
         setIsLoading(false);
-    } }, []);
+    } }, [dogsByName.length]);
 
     const changeHandler = (event) => {
         validateSearchBar({ ...searchBar, [event.target.name]: event.target.value }, setErrors, errors);
@@ -39,8 +42,8 @@ const Home = () => {
         changePages(1);
     };
     
-    const dogsByName = useSelector(state => state.dogsByName);
-    const searchBarValue = useSelector(state => state.searchBarValue);
+    // const dogsByName = useSelector(state => state.dogsByName);
+    // const searchBarValue = useSelector(state => state.searchBarValue);
 
     //FILTER BY ORIGIN
     const handleOriginFilter = (event) => {

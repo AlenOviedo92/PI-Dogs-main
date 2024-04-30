@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-//import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { getTemperaments, getDogs } from '../../redux/actions';
+import { useParams, useHistory } from 'react-router-dom';
+import { getTemperaments, getDogs, updateDog } from '../../redux/actions';
 import { validate, convertArray, repeatedDog } from '../../utils';
-import dotenv from 'dotenv';
-import axios from 'axios';
-import style from './Form.module.css';
+import style from './UpdateDog.module.css';
 
-dotenv.config();
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-const Form = () => {
+const UpdateDog = () => {
     const dispatch = useDispatch();
-    //const history = useHistory();
+    const history = useHistory();
+    const { id } = useParams();
 
-    useEffect(() => { dispatch(getTemperaments()) }, [dispatch]);
-    useEffect(() => { dispatch(getDogs()) }, [dispatch]);
+    useEffect(() => { 
+        dispatch(getTemperaments()) 
+    }, [dispatch]);
+
+    useEffect(() => { 
+        dispatch(getDogs()) 
+    }, [dispatch]);
 
     const temperaments = useSelector(state => state.temperaments);
     const dogs = useSelector(state => state.dogs);
@@ -42,7 +43,7 @@ const Form = () => {
         image: ''
     });
 
-    const handleOnChange = (event) => {                                         //Para poder cambiar los inputs del form debo cambiar el estado local. Al hacer cambios en los inputs se ejecutará una fn que modifica el estado local
+    const handleOnChange = (event) => {                                         //Para modificar los inputs del form debo cambiar el estado local. Al hacer cambios en los inputs se ejecutará una fn que modifica el estado local
         const property = event.target.name;                                     //Con esta fn logro que el input sea un reflejo del estado
         const value = event.target.value;
         validate({ ...form, [property]: value }, setErrors, errors);            //Quiero validar los datos ingresados al form, cada vez que ocurra un cambio en los inputs(Por esto llamo la fn validate dentro de handleOnChange). A validate NO le paso como parámetro el estado inicial(form) sino el estado modificado{ ...form, [property]: value }, esto se hace para evitar un "delete" en los valores registrados de los inputs 
@@ -75,12 +76,11 @@ const Form = () => {
             temperaments: form.temperaments,
             image: form.image
         };
-        
-        if(!repeatedDog(form.name, dogs)) {                                     //Si la raza NO esta repetida, la creo
-            axios.post(`${backendUrl}/dogs/`, newForm)                          //Como segundo parámetro del .post() va el form(Dog a crear)
-            .then(res => alert('Successfully created dog breed'))
-            .catch(err => alert(err));
-            //history.push('/home');
+
+        if(!repeatedDog(form.name, dogs)) {                                     //Si la raza NO esta repetida, la actualizo
+            dispatch(updateDog(id, newForm));
+            alert('Successfully updated dog breed');
+            history.push('/home');
         } else {
             alert('Repeated dog breed');
         }
@@ -89,7 +89,7 @@ const Form = () => {
     return(
         <form onSubmit={submitHandler} id='form' className={style.form}>
             <div className={style['form-container']}> 
-                <h1 className={style.h1}>CREATE DOG BREED</h1>
+                <h1 className={style.h1}>UPDATE DOG BREED</h1>
                 <div>
                     <label>Image URL: </label>
                     <input type='text' value={form.image} onChange={handleOnChange} name='image' />
@@ -123,18 +123,18 @@ const Form = () => {
                 </div>
                 <div>
                     <label>Temperament: </label>
-                    <select multiple onChange={selectHandler}/*size='51'*/> 
+                    <select multiple onChange={selectHandler}> 
                         {temperaments.map((temperament) => {
                             return <option key={temperament.id} value={temperament.id}>{temperament.name}</option>
                         })}
                     </select>
                 </div>
                 <div className={style['button-container']}>
-                    <button type='submit' disabled={!form.image || !form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperaments.length || errors.name || errors.maxHeight || errors.minHeight || errors.maxWeight || errors.minWeight || errors.image || errors.life_span}>CREATE</button>
+                    <button type='submit' disabled={!form.image || !form.name || !form.maxHeight || !form.minHeight || !form.maxWeight || !form.minWeight || !form.life_span || !form.temperaments.length || errors.name || errors.maxHeight || errors.minHeight || errors.maxWeight || errors.minWeight || errors.image || errors.life_span}>UPDATE</button>
                 </div>
             </div>
         </form>
     )
 };
 
-export default Form;
+export default UpdateDog;

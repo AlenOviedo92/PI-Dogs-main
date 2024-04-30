@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { getDog, clearDog, deleteDog } from '../../redux/actions';
 import style from './Detail.module.css';
 
 const Detail = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { id } = useParams();                                                 //Aquí capturo el id ingresado por params
 
     useEffect(() => {                                                           //Al montarse el componente Detail, hago el dispatch de la action que modifica la propiedad dog del Estado Global
@@ -18,6 +19,11 @@ const Detail = () => {
     const handlerDelete = () => {
         dispatch(deleteDog(id));
         alert('Successfully deleted dog breed');
+        history.push('/home');
+    };
+
+    const handlerUpdate = () => {
+        history.push(`/update/${id}`);
     };
 
     return(
@@ -30,6 +36,7 @@ const Detail = () => {
             <p><strong>Temperaments:</strong> {dog.temperaments}</p>
             <p><strong>Life span:</strong> {dog.life_span}</p>
             {isNaN(id) ? <button onClick={handlerDelete}>ELIMINAR</button> : null}
+            {isNaN(id) ? <button onClick={handlerUpdate}>EDITAR</button> : null}
         </div>
     )
 };

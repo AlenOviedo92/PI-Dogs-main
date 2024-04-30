@@ -81,10 +81,17 @@ const removeDog = async(id) => {
     }
 };
 
+const updatedDog = async(id, data) => {
+    const dog = await Dog.findByPk(id);
+    const updatedDog = await dog.update(data);
+    return updatedDog;
+};
+
 module.exports = {
     getDogByName,
     getAllDogs,
     getDogById,
     createDog,
-    removeDog
+    removeDog,
+    updatedDog
 };
