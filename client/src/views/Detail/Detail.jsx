@@ -35,8 +35,10 @@ const Detail = () => {
             <p><strong>Weight:</strong> {dog.weight}</p>
             <p><strong>Temperaments:</strong> {dog.temperaments}</p>
             <p><strong>Life span:</strong> {dog.life_span}</p>
-            {isNaN(id) ? <button onClick={handlerDelete}>ELIMINAR</button> : null}
-            {isNaN(id) ? <button onClick={handlerUpdate}>EDITAR</button> : null}
+            <div className={style['buttons-container']}>
+                {isNaN(id) ? <button onClick={handlerDelete} className={style['delete-button']}>ELIMINAR</button> : null}
+                {isNaN(id) ? <button onClick={handlerUpdate} className={style['update-button']}>EDITAR</button> : null}
+            </div>
         </div>
     )
 };
