@@ -41,9 +41,6 @@ const Home = () => {
         dispatch(saveValueSearchBar(searchBar.name));
         changePages(1);
     };
-    
-    // const dogsByName = useSelector(state => state.dogsByName);
-    // const searchBarValue = useSelector(state => state.searchBarValue);
 
     //FILTER BY ORIGIN
     const handleOriginFilter = (event) => {
@@ -103,12 +100,13 @@ const Home = () => {
             
             <div className={style['buttons-container']}>
                 <select onChange={handleOriginFilter}>
+                    <option value='All'>All</option>
                     <option value='API'>Its origin is the API</option>
                     <option value='DB'>Its origin is the DB</option>
-                    <option value='All'>All</option>
                 </select>
 
                 <select onChange={handleTemperamentFilter}>
+                    <option value='All'>All</option>
                     {
                         temperaments.map((temperament) => {
                             return <option key={temperament.id} value={temperament.name}>{temperament.name}</option>
@@ -117,11 +115,13 @@ const Home = () => {
                 </select>
 
                 <select onChange={handleOrder}>
+                    <option>Select</option>
                     <option value='AO'>Ascending order (alphabet)</option>
                     <option value='DO'>Descending order (alphabet)</option>
                 </select>
 
                 <select onChange={handleOrder}>
+                    <option>Select</option>
                     <option value='DW'>Ascending order (weight)</option>
                     <option value='AW'>Descending order (weight)</option>                                         {/*OJO CON ESTE ORDEN???*/}
                 </select>

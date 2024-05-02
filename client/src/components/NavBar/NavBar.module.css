@@ -1,13 +1,13 @@
 .mainContainer {
     display: flex;
     justify-content: center;
-    padding: 50px;
+    padding: 20px;
     border: transparent;
 }
 
 .mainContainer a {
     padding: 0px 30px;
-    margin: 0px 40px;
+    margin: 0px 20px;
     color: #582f0e;
     text-decoration: none;
     font-family: Germania One, sans-serif;
@@ -21,7 +21,45 @@
 }
 
 .mainContainer a:hover {
+    font-size: 60px;
+}
+
+.landingButton {
+    display: flex;
+    justify-content: left;
+    padding: 30px;
+    border: transparent;
+}
+
+.landingButton a {
+    color: #582f0e;
+    text-decoration: none;
+    font-family: Germania One, sans-serif;
+    font-size: 50px;
+    transition: font-size 0.3s;
+    /* Para que el hover no mueva los demás elementos de la vista */
+    width: 120px;                                                           /* Establece un ancho fijo para los enlaces */
+    height: 50px;                                                           /* Establece una altura fija para los enlaces */
+    display: inline-block;                                                  /* Para que el ancho funcione */
+    text-align: left;                                                       /* Alínea a la izquierda el texto del enlace */
+} 
+
+.landingButton a:hover {
     font-size: 70px;
+}
+
+.resetButton {
+    border: 2px solid #333d29;
+    border-radius: 5px;
+    background-color: #b6ad90;
+    font-family: Saira, sans-serif;
+    cursor: pointer;
+}
+
+.resetButton:hover {
+    border: 2px solid #b6ad90;
+    background-color: #333d29;
+    color: #b6ad90;
 }
 
 
