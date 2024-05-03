@@ -14,10 +14,6 @@ const UpdateDog = () => {
         dispatch(getTemperaments()) 
     }, [dispatch]);
 
-    useEffect(() => { 
-        dispatch(getDogs()) 
-    }, [dispatch]);
-
     const temperaments = useSelector(state => state.temperaments);
     const dogs = useSelector(state => state.dogs);
 
@@ -79,8 +75,9 @@ const UpdateDog = () => {
 
         if(!repeatedDog(form.name, dogs)) {                                     //Si la raza NO esta repetida, la actualizo
             dispatch(updateDog(id, newForm));
-            alert('Successfully updated dog breed');
+            alert('Updated dog breed');
             history.push('/home');
+            dispatch(getDogs());
         } else {
             alert('Repeated dog breed');
         }

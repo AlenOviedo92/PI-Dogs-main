@@ -18,7 +18,7 @@ const Detail = () => {
 
     const handlerDelete = () => {
         dispatch(deleteDog(id));
-        alert('Successfully deleted dog breed');
+        alert('Deleted dog breed');
         history.push('/home');
     };
 

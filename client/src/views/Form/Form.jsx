@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-//import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getTemperaments, getDogs } from '../../redux/actions';
 import { validate, convertArray, repeatedDog } from '../../utils';
 import dotenv from 'dotenv';
@@ -12,10 +11,10 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const Form = () => {
     const dispatch = useDispatch();
-    //const history = useHistory();
 
-    useEffect(() => { dispatch(getTemperaments()) }, [dispatch]);
-    useEffect(() => { dispatch(getDogs()) }, [dispatch]);
+    useEffect(() => { 
+        dispatch(getTemperaments()) 
+    }, [dispatch]);
 
     const temperaments = useSelector(state => state.temperaments);
     const dogs = useSelector(state => state.dogs);
@@ -78,9 +77,9 @@ const Form = () => {
         
         if(!repeatedDog(form.name, dogs)) {                                     //Si la raza NO esta repetida, la creo
             axios.post(`${backendUrl}/dogs/`, newForm)                          //Como segundo parámetro del .post() va el form(Dog a crear)
-            .then(res => alert('Successfully created dog breed'))
+            .then(res => alert('Created dog breed'))
             .catch(err => alert(err));
-            //history.push('/home');
+            dispatch(getDogs());
         } else {
             alert('Repeated dog breed');
         }
