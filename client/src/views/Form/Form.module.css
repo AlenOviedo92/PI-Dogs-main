@@ -56,7 +56,7 @@
     position: absolute;                     /* Hace que el mensaje de error esté posicionado de manera absoluta con respecto a su contenedor */
     bottom: 5px;                            /* Lo posiciona en la parte inferior del contenedor */
     left: 0;                                /* Lo posiciona en la parte izquierda del contenedor */
-    transform: translateX(129%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
+    transform: translateX(220%);            /* Mueve el mensaje de error 100% hacia la derecha para que esté justo al lado del input */
 }
 
 .error-image {
@@ -66,7 +66,7 @@
     position: absolute;                     
     bottom: 5px;                            
     left: 0;                                
-    transform: translateX(143%);             
+    transform: translateX(356%);             
 }
 
 .error-life-span {
@@ -76,7 +76,7 @@
     position: absolute;                     
     bottom: 5px;                            
     left: 0;                                
-    transform: translateX(153%);             
+    transform: translateX(245%);             
 }
 
 .form-container button {

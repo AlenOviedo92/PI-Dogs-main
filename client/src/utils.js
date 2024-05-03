@@ -82,7 +82,7 @@ const validate = (form, setErrors, errors) => {                                 
     if(/^[A-Za-zñÑ\s]*$/.test(form.name)) {
         setErrors((errors) => ({ ...errors, name: '' }));
     } else {
-        setErrors((errors) => ({ ...errors, name: 'There is an error in the name' }));
+        setErrors((errors) => ({ ...errors, name: 'Invalid character' }));
     }
     if(form.name === '') setErrors((errors) => ({ ...errors, name: '' }));
 
@@ -98,7 +98,7 @@ const validate = (form, setErrors, errors) => {                                 
     if(/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/.test(form.image)) {
         setErrors((errors) => ({ ...errors, image: '' }));
     } else {
-        setErrors((errors) => ({ ...errors, image: 'The value entered is not a URL' }));
+        setErrors((errors) => ({ ...errors, image: "It's not URL" }));
     }
     if(!form.image) setErrors((errors) => ({ ...errors, image: '' }));
     
@@ -106,7 +106,7 @@ const validate = (form, setErrors, errors) => {                                 
     if(/^[0-9,-\s]*$/.test(form.life_span)) {
         setErrors((errors) => ({ ...errors, life_span: '' }));
     } else {
-        setErrors((errors) => ({ ...errors, life_span: 'The value entered is invalid' }));
+        setErrors((errors) => ({ ...errors, life_span: 'Invalid character' }));
     }
 };
 
@@ -114,7 +114,7 @@ const validateSearchBar = (searchBar, setErrors, errors) => {
     if(searchBar.name.length >= 4) {
         setErrors((errors) => ({ ...errors, name: '' }));
     } else {
-        setErrors((errors) => ({ ...errors, name: 'The breed name must have at least four characters' }));
+        setErrors((errors) => ({ ...errors, name: 'Enter minimun four characters' }));
     }
     if(searchBar.name === '') setErrors((errors) => ({ ...errors, name: '' }));
 };

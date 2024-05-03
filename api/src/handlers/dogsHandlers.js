@@ -5,7 +5,7 @@ const getDogsHandler = async(req, res) => {
     try {
         const results = name ? await getDogByName(name) : await getAllDogs();
         if(results.length === 0) {
-            res.status(200).send(`The "${name}" dog breed does not exist`); 
+            res.status(200).send(`The "${name}" dog breed not exist`); 
         } else {
             res.status(200).json(results); 
         }

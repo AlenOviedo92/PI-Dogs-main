@@ -26,9 +26,11 @@
 
 .landingButton {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;                                         /* Cambia de 'left' a 'space-between' */
+    align-items: center;                                                    /* Alinea los elementos verticalmente */
     padding: 30px;
     border: transparent;
+
 }
 
 .landingButton a {
@@ -41,7 +43,6 @@
     width: 120px;                                                           /* Establece un ancho fijo para los enlaces */
     height: 50px;                                                           /* Establece una altura fija para los enlaces */
     display: inline-block;                                                  /* Para que el ancho funcione */
-    text-align: left;                                                       /* Alínea a la izquierda el texto del enlace */
 } 
 
 .landingButton a:hover {
@@ -51,9 +52,11 @@
 .resetButton {
     border: 2px solid #333d29;
     border-radius: 5px;
+    height: 40px;                                                           /* Ajusta la altura del botón */
     background-color: #b6ad90;
     font-family: Saira, sans-serif;
     cursor: pointer;
+    margin-left: auto;                                                      /* Mueve el botón RESET SEARCH hacia la derecha */
 }
 
 .resetButton:hover {
